@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import './App.css';
+// import './App.css';
 
-import NavigationList from './components/NavigationList';
+import NavBar from './components/NavBar';
+import TabList from './components/TabList';
 
 class App extends Component {
   render() {
     return (
       <div>
-        <NavigationList />
+        <NavBar />
+        <TabList />
       </div>
     );
   }
