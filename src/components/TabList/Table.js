@@ -1,9 +1,39 @@
 import React, { Component } from 'react';
 
 import TableRow from "./Table/TableRow";
-
+import ButtonRow from "./Table/ButtonRow";
 
 class Table extends Component {
+    constructor(){
+        super();
+
+        this.state = {
+            buttonsList:[
+                {id:1, isActive:false},
+                {id:2, isActive:true},
+                {id:3, isActive:false},
+            ],
+        }
+
+        this.handleButtonClick=this.handleButtonClick.bind(this);
+
+    }
+
+    handleButtonClick(id){
+
+        let buttonsList = this.state.buttonsList.slice();
+
+        buttonsList.forEach((btn, i)=>{
+            if(btn.id==id){
+                btn.isActive=!btn.isActive;
+            }                
+        });
+
+        this.setState({
+            buttonsList:buttonsList,
+        });
+    }
+
     render() {
         return (
             <div>
@@ -38,17 +68,10 @@ class Table extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td className="text-center">
-                                        <button type="button" class="btn btn-primary">On</button>
-                                    </td>
-                                    <td className="text-center">
-                                        <button type="button" class="btn btn-primary">On</button>
-                                    </td>
-                                    <td className="text-center">
-                                        <button type="button" class="btn btn-primary">On</button>
-                                    </td>
-                                </tr>
+                                <ButtonRow 
+                                    buttonsList={this.state.buttonsList}
+                                    onButtonClick={this.handleButtonClick}
+                                />
                             </tbody>
                         </table>
                     </div>
