@@ -1,27 +1,29 @@
 import React, { Component } from 'react';
 
 
-class ActionDropdown extends Component {
+class ButtonRow extends Component {
     handleClick(e){
-        this.props.onButtonClick(e.target.id);
+        this.props.onButtonClick(e.target.id, this.props.masterBtnId);
     }
 
     render() {
         let buttonsList = this.props.buttonsList;
 
-        buttonsList= buttonsList.map((button)=>{
+        // console.log('buttonsList',buttonsList);
+
+        buttonsList= buttonsList.map((button,i)=>{
             return (
-            <td className="text-center">
-                {button.isActive?
-                                <button id={button.id} 
-                                        className="btn btn-danger" 
-                                        onClick={e=>this.handleClick(e)}
-                                >On</button>:
-                                <button id={button.id} 
-                                        className="btn btn-primary"
-                                        onClick={e=>this.handleClick(e)}
-                                >Off</button>}
-            </td>);
+                <td className="text-center" key={i} >
+                    {button.isActive?
+                                    <button id={button.id} 
+                                            className="btn btn-danger" 
+                                            onClick={e=>this.handleClick(e)}
+                                    >On</button>:
+                                    <button id={button.id} 
+                                            className="btn btn-primary"
+                                            onClick={e=>this.handleClick(e)}
+                                    >Off</button>}
+                </td>);
         });
 
         return (
@@ -32,4 +34,4 @@ class ActionDropdown extends Component {
     }
 }
 
-export default ActionDropdown;
+export default ButtonRow;

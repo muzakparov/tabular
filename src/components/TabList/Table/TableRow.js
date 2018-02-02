@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 
+import MasterButton from './TableRow/MasterButton';
 
-class ActionDropdown extends Component {
+class TableRow extends Component {
     render() {
+        // console.log("BEFORE MASTERBUTTON", this.props.isActive);
+
         return (
             <tr className="text-center">
                 <td className="">
@@ -11,12 +14,16 @@ class ActionDropdown extends Component {
                 <td className="">ENG.1</td>
                 <td className="">001</td>
                 <td className="">Chelsea vs AFC Bournemouth</td>
-                <td className="">
-                    <button type="button" class="btn btn-primary">On</button>
+                <td>
+                    <MasterButton
+                        isActive={this.props.isActive}
+                        masterBtnId={this.props.masterBtnId} 
+                        onMasterBtnClick={(masterBtnId)=>this.props.onMasterBtnClick(masterBtnId)}
+                    />
                 </td>
             </tr>
         );
     }
 }
 
-export default ActionDropdown;
+export default TableRow;

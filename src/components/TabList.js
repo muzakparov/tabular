@@ -1,10 +1,23 @@
 import React, { Component } from 'react';
-
 import ActionDropdown from "./TabList/ActionDropdown";
 import Table from "./TabList/Table";
 
 
+
 class TabList extends Component {
+
+    componentDidMount(){
+        console.log('componentDidMount');
+        const url = "https://trader-dot-exotic-parameter-predictions.appspot.com/get_status?league=ITA.1";
+
+        jsonp(url,function(err, data){
+            if (err) throw err;
+            console.log('cb', data);
+        });
+              
+    }
+    
+
 
     render() {
         return (
