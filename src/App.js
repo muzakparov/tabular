@@ -67,6 +67,7 @@ class App extends Component {
 
     const { leagues } = this.state
     const { email } = this.state
+    const { matchRowArr } = this.state
 
     return (
       <div>
@@ -75,7 +76,9 @@ class App extends Component {
           email={EMAIL}
           onLeagueSelectChange = {this.handleLeagueSelectChange}
         />
-        <TabList />
+        <TabList 
+          matchRowArr={matchRowArr}
+        />
       </div>
     );
   }

@@ -4,33 +4,7 @@ import TableRow from "./Table/TableRow";
 import ButtonRow from "./Table/ButtonRow";
 
 
-
-
-class Table extends Component {
-    constructor() {
-        super();
-
-        this.state = {
-            // allBtns: [{
-            //     masterBtn: {
-            //         id: 1,
-            //         isActive: true,
-            //         buttonsList: [
-            //             { id: 1, isActive: false },
-            //             { id: 2, isActive: true },
-            //             { id: 3, isActive: false },
-            //         ],
-            //     },
-            // },
-            // ],
-            matchRowArr: [],
-        };
-
-        this.handleButtonClick = this.handleButtonClick.bind(this);
-        this.handleMasterBtnClick = this.handleMasterBtnClick.bind(this);
-    }
-
-    
+class Table extends Component {   
 
     handleButtonClick(id, masterBtnId) {
 
@@ -129,88 +103,31 @@ class Table extends Component {
     }
 
     render() {
-        // const matchRowArr = this.state.matchRowArr.slice();
+        console.log('TABLE',this.props.matchRowArr, '\n\n\n')
 
-        // let t = 0
-        // const buttonRowsList = matchRowArr.map((allBtn, i) => {
-        //     if (t === 0) {
-        //         // console.log('Before allBtn', allBtn);
-        //         t++;
-        //     }
-
-        //     return (
-        //         <ButtonRow
-        //             key={i}
-        //             allBtns={allBtns}
-        //             masterBtnId={allBtn.masterBtn.id}
-        //             buttonsList={allBtn.masterBtn.buttonsList}
-        //             onButtonClick={this.handleButtonClick}
-        //         />);
-        // });
-
-        // const tableRowsList = allBtns.map((allBtn, i) => {
-        //     return (
-        //         <TableRow
-        //             key={i}
-        //             masterBtnId={allBtn.masterBtn.id}
-        //             isActive={allBtn.masterBtn.isActive}
-        //             allBtns={this.state.allBtns}
-        //             onMasterBtnClick={this.handleMasterBtnClick}
-        //         />
-        //     );
-        // });
-
+        
         return (
-            <div>
-                {/* <div className="row">
-                    <div className="col-md-6">
-                        <ul className="list-inline text-center" style={{ marginTop: "20px", marginBottom: "20px" }}></ul>
-                        <table className="table table-striped table-condensed table-bordered">
-                            <thead>
-                                <tr>
-                                    <th className="text-center">Kickoff</th>
-                                    <th className="text-center">League</th>
-                                    <th className="text-center">Id</th>
-                                    <th className="text-center">Name</th>
-                                    <th className="text-center">Master</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {tableRowsList}
-                            </tbody>
-                        </table>
-                    </div >
-
-                    <div className="col-md-6">
-                        <div className="col-md-6">
-                            <ul className="list-inline text-center" style={{ marginTop: "20px", marginBottom: "20px" }}></ul>
-                            <table className="table table-striped table-condensed table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th className="text-center">Goals</th>
-                                        <th className="text-center">Corners</th>
-                                        <th className="text-center">Team Cards</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {buttonRowsList}
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-                    <div className="text-center">
-                        <ul className="pagination" style={{ marginTop: "10px", marginBottom: "5px" }}>
-                            <li className="active">
-                                <a>1</a>
-                            </li>
-                            <li className="">
-                                <a>2</a>
-                            </li>
-                        </ul>
-                    </div >
-                </div> */}
-            </div>
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Kickoff</th>
+                        <th scope="col">League</th>
+                        <th scope="col">Id</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Master</th>
+                        <th scope="col">Goals</th>
+                        <th scope="col">Corners</th>
+                        <th scope="col">Team Cards</th>
+                        <th scope="col">H-p Cards</th>
+                        <th scope="col">A-p Cards</th>
+                        <th scope="col">H-gs</th>
+                        <th scope="col">A-gs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr></tr>
+                </tbody>
+            </table>
         );
     }
 }
