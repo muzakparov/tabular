@@ -105,9 +105,14 @@ class Table extends Component {
     render() {
         console.log('TABLE',this.props.matchRowArr, '\n\n\n')
 
+        const { matchRowArr } = this.props
+matchRowArr
+        const tableRowsList = matchRowArr.map(matchRow=>{
+            return <TableRow key={matchRow.event_id} {...matchRow}/>
+        });
         
         return (
-            <table className="table">
+            <table className="table table-striped table-condensed table-bordered">
                 <thead>
                     <tr>
                         <th scope="col">Kickoff</th>
@@ -125,7 +130,7 @@ class Table extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr></tr>
+                    {tableRowsList}
                 </tbody>
             </table>
         );
