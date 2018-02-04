@@ -4,18 +4,10 @@ import NavBarHeader from './NavBar/NavBarHeader';
 import LeagueListDropdown from './NavBar/LeagueListDropdown';
 
 class NavBar extends Component {
-    constructor() {
-        super();
-
-        this.state = {
-            leagues: [
-                1, 2, 3, 4, 5
-            ],
-            email: "muzakparov@gmail.com",
-        };
-    }
-
+    
     render() {
+        const { leagues } = this.props
+        const { email } = this.props
 
         return (
             <div>
@@ -30,10 +22,13 @@ class NavBar extends Component {
                                     <a>League</a>
                                 </li>
                                 <li style={{ marginTop: "7px" }}>
-                                    <LeagueListDropdown leagues={this.state.leagues} />
+                                    <LeagueListDropdown 
+                                        leagues={leagues}
+                                        onLeagueSelectChange = {(selectedLeague)=>this.props.onLeagueSelectChange(selectedLeague)} 
+                                    />
                                 </li>
                                 <li>
-                                    <a href="#">{this.state.email}</a>
+                                    <a href="#">{email}</a>
                                 </li>
                                 <li>
                                     <a style={{ paddingLeft: "0px", paddingRight: "0px" }}>|</a>

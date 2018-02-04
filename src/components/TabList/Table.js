@@ -3,28 +3,34 @@ import React, { Component } from 'react';
 import TableRow from "./Table/TableRow";
 import ButtonRow from "./Table/ButtonRow";
 
+
+
+
 class Table extends Component {
     constructor() {
         super();
 
         this.state = {
-            allBtns: [{
-                    masterBtn: {
-                        id: 1,
-                        isActive: true,
-                        buttonsList: [
-                            { id: 1, isActive: false },
-                            { id: 2, isActive: true },
-                            { id: 3, isActive: false },
-                        ],
-                    },
-                },
-            ],
+            // allBtns: [{
+            //     masterBtn: {
+            //         id: 1,
+            //         isActive: true,
+            //         buttonsList: [
+            //             { id: 1, isActive: false },
+            //             { id: 2, isActive: true },
+            //             { id: 3, isActive: false },
+            //         ],
+            //     },
+            // },
+            // ],
+            matchRowArr: [],
         };
 
         this.handleButtonClick = this.handleButtonClick.bind(this);
         this.handleMasterBtnClick = this.handleMasterBtnClick.bind(this);
     }
+
+    
 
     handleButtonClick(id, masterBtnId) {
 
@@ -34,50 +40,50 @@ class Table extends Component {
         let masterBtnIndex;
         let masterBtnNew;
         let buttonsListNew;
-        let totalOffCount=0;
+        let totalOffCount = 0;
 
         // console.log('allBtns OLD',allBtns);
 
         allBtns.forEach((masterBtn, i) => {
             let masterBtnObj = masterBtn.masterBtn;
             if (masterBtnObj.id === masterBtnId) {
-                masterBtnNew = {...masterBtnObj};
+                masterBtnNew = { ...masterBtnObj };
                 buttonsListNew = masterBtnNew.buttonsList.slice();
-                
-                buttonsListNew.forEach((btn)=>{
+
+                buttonsListNew.forEach((btn) => {
                     // console.log('btn',btn.id, id);
-                    
 
-                    if(btn.id===id){
+
+                    if (btn.id === id) {
                         // console.log("inside")
-                        btn.isActive=!btn.isActive;
+                        btn.isActive = !btn.isActive;
 
-                        if(btn.isActive){
-                            masterBtnNew.isActive=true;
+                        if (btn.isActive) {
+                            masterBtnNew.isActive = true;
                         }
 
                         masterBtnNew.buttonsList = buttonsListNew;
                         // console.log('masterBtnNew',masterBtnNew);
-                        masterBtnIndex=i;
-                        
+                        masterBtnIndex = i;
+
                     }
 
-                    if(!btn.isActive){
+                    if (!btn.isActive) {
                         totalOffCount++;
                     }
                 });
 
-               
+
             }
-            
-            
+
+
         });
-        if(totalOffCount===buttonsListNew.length){
+        if (totalOffCount === buttonsListNew.length) {
             console.log("MASTER BUTT XXX", masterBtnNew);
-            masterBtnNew.isActive=false;    
+            masterBtnNew.isActive = false;
         }
 
-        allBtns.splice(masterBtnIndex,1,{masterBtn:masterBtnNew});
+        allBtns.splice(masterBtnIndex, 1, { masterBtn: masterBtnNew });
 
         // console.log('allBtns NEW',allBtns);
         console.log('\n');
@@ -86,36 +92,36 @@ class Table extends Component {
         });
     }
 
-    handleMasterBtnClick(masterBtnId){
+    handleMasterBtnClick(masterBtnId) {
         // console.log("master click", masterBtnId);
-        
+
         let masterBtnObjIndex;
         let masterBtnObjNew;
         let allBtns = this.state.allBtns.slice();
 
-        let doNothing=false;
+        let doNothing = false;
 
-        allBtns.forEach((masterBtnObj, i)=>{
-            if(masterBtnObj.masterBtn.id===masterBtnId){
-                masterBtnObjIndex=i;
-                masterBtnObjNew={...masterBtnObj};
-                
+        allBtns.forEach((masterBtnObj, i) => {
+            if (masterBtnObj.masterBtn.id === masterBtnId) {
+                masterBtnObjIndex = i;
+                masterBtnObjNew = { ...masterBtnObj };
+
                 masterBtnObjNew.masterBtn.isActive = !masterBtnObjNew.masterBtn.isActive;
-                if(masterBtnObjNew.masterBtn.isActive){
-                    doNothing=true;
+                if (masterBtnObjNew.masterBtn.isActive) {
+                    doNothing = true;
                 }
                 // console.log('masterBtnObjNew isActive',masterBtnObjNew.isActive);
-                masterBtnObjNew.masterBtn.buttonsList.forEach(btn=>{
-                    btn.isActive=masterBtnObjNew.masterBtn.isActive;
+                masterBtnObjNew.masterBtn.buttonsList.forEach(btn => {
+                    btn.isActive = masterBtnObjNew.masterBtn.isActive;
                 });
             }
         });
 
         //dont change master button if it is ON
-        if(doNothing)
+        if (doNothing)
             return
 
-        allBtns.splice(masterBtnObjIndex,1,masterBtnObjNew);
+        allBtns.splice(masterBtnObjIndex, 1, masterBtnObjNew);
 
         this.setState({
             allBtns,
@@ -123,39 +129,40 @@ class Table extends Component {
     }
 
     render() {
-        const allBtns = this.state.allBtns.slice();
+        // const matchRowArr = this.state.matchRowArr.slice();
 
-        let t=0
-        const buttonRowsList = allBtns.map((allBtn, i) => {
-            if(t===0){
-                // console.log('Before allBtn', allBtn);
-                t++;
-            }
-            return (
-            <ButtonRow
-                key={i}
-                allBtns={allBtns}
-                masterBtnId={allBtn.masterBtn.id}
-                buttonsList={allBtn.masterBtn.buttonsList}
-                onButtonClick={this.handleButtonClick}
-            />);
-        });
+        // let t = 0
+        // const buttonRowsList = matchRowArr.map((allBtn, i) => {
+        //     if (t === 0) {
+        //         // console.log('Before allBtn', allBtn);
+        //         t++;
+        //     }
 
-        const tableRowsList = allBtns.map((allBtn, i)=>{
-            return (
-                <TableRow
-                    key={i}
-                    masterBtnId={allBtn.masterBtn.id}
-                    isActive={allBtn.masterBtn.isActive}
-                    allBtns={this.state.allBtns} 
-                    onMasterBtnClick={this.handleMasterBtnClick}
-                />
-            );
-        });
+        //     return (
+        //         <ButtonRow
+        //             key={i}
+        //             allBtns={allBtns}
+        //             masterBtnId={allBtn.masterBtn.id}
+        //             buttonsList={allBtn.masterBtn.buttonsList}
+        //             onButtonClick={this.handleButtonClick}
+        //         />);
+        // });
+
+        // const tableRowsList = allBtns.map((allBtn, i) => {
+        //     return (
+        //         <TableRow
+        //             key={i}
+        //             masterBtnId={allBtn.masterBtn.id}
+        //             isActive={allBtn.masterBtn.isActive}
+        //             allBtns={this.state.allBtns}
+        //             onMasterBtnClick={this.handleMasterBtnClick}
+        //         />
+        //     );
+        // });
 
         return (
             <div>
-                <div className="row">
+                {/* <div className="row">
                     <div className="col-md-6">
                         <ul className="list-inline text-center" style={{ marginTop: "20px", marginBottom: "20px" }}></ul>
                         <table className="table table-striped table-condensed table-bordered">
@@ -202,7 +209,7 @@ class Table extends Component {
                             </li>
                         </ul>
                     </div >
-                </div>
+                </div> */}
             </div>
         );
     }
