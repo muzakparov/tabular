@@ -10,8 +10,7 @@ class NavBar extends Component {
         const { email } = this.props
 
         return (
-            <div>
-                <nav className="navbar navbar-inverse navbar-fixed-top">
+                <nav className="navbar navbar-inverse">
                     <div className="container-fluid">
                         <NavBarHeader />
 
@@ -41,8 +40,7 @@ class NavBar extends Component {
                         </div>
                     </div>
                 </nav>
-            </div>
-        );
+       );
     }
 }
 

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import { NavLink } from "react-router-dom";
 
-import TableRow from "./Table/TableRow";
-import ButtonRow from "./Table/ButtonRow";
+import LaunchpadTableHead from "./LaunchpadTable/LaunchpadTableHead";
+import LaunchpadTableRow from "./LaunchpadTable/LaunchpadTableRow";
 
 
-class Table extends Component {   
+class LaunchpadTable extends Component {
 
     handleButtonClick(id, masterBtnId) {
 
@@ -102,39 +103,55 @@ class Table extends Component {
         });
     }
 
+
     render() {
-        console.log('TABLE',this.props.matchRowArr, '\n\n\n')
+        // console.log('TABLE', this.props.matchRowArr, '\n\n\n')
 
         const { matchRowArr } = this.props
-matchRowArr
-        const tableRowsList = matchRowArr.map(matchRow=>{
-            return <TableRow key={matchRow.event_id} {...matchRow}/>
+
+        const tableRowsList = matchRowArr.map(matchRow => {
+            return (
+                <LaunchpadTableRow
+                    key={matchRow.event_id}
+                    {...matchRow}
+                    onToggleBtnStatus={this.props.onToggleBtnStatus}
+                />
+            );
         });
-        
+
         return (
-            <table className="table table-striped table-condensed table-bordered">
-                <thead>
-                    <tr>
-                        <th scope="col">Kickoff</th>
-                        <th scope="col">League</th>
-                        <th scope="col">Id</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Master</th>
-                        <th scope="col">Goals</th>
-                        <th scope="col">Corners</th>
-                        <th scope="col">Team Cards</th>
-                        <th scope="col">H-p Cards</th>
-                        <th scope="col">A-p Cards</th>
-                        <th scope="col">H-gs</th>
-                        <th scope="col">A-gs</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {tableRowsList}
-                </tbody>
-            </table>
+            <div>
+                <ul className="nav nav-tabs">
+                    <li className="nav-item">
+                        <NavLink
+                            to="/"
+                            className="nav-link"                            
+                            activeClassName="activeX"
+                        >
+                            LaunchpadTable
+                        </NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink
+                            to="/other"
+                            className="nav-link"
+                            activeClassName="activeX"
+                        >
+                            OtherComponent
+                        </NavLink>
+                    </li>                    
+                </ul>
+                <table className="table table-striped table-condensed table-bordered">
+                    <thead>
+                        <LaunchpadTableHead />
+                    </thead>
+                    <tbody>
+                        {tableRowsList}
+                    </tbody>
+                </table>
+            </div>
         );
     }
 }
 
-export default Table;
+export default LaunchpadTable;
