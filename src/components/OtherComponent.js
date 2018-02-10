@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 import { NavLink } from "react-router-dom"
 
+import {
+    BrowserRouter as Router,
+    Route,
+    Redirect,
+} from "react-router-dom";
+import { Switch } from "react-router";
+
+import PlaceholderComponent from './PlaceholderComponent';
+
 
 class OtherComponent extends Component {
 
@@ -29,7 +38,17 @@ class OtherComponent extends Component {
                     </li>
                 </ul>
 
-
+                <Router>
+                    <Switch>
+                        <Route exact 
+                            path="/other" 
+                            component={PlaceholderComponent} 
+                        />
+                        {/* <Route path="/other" component={OtherComponent} /> */}
+                       
+                        {/* <Redirect from="/*" to="/404" /> */}
+                    </Switch>
+                </Router>
                 <p className="text-center middle">OtherComponent</p>
             </div>
         );

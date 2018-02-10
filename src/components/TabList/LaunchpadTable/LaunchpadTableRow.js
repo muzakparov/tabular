@@ -51,12 +51,12 @@ class TableRow extends Component {
 
         return (
             <tr className="text-center">
-                <td>
+                <td className="align-middle">
                     <KickoffDateLabel kickoff={kickoff} />                    
                 </td>
-                <td>{league}</td>
-                <td>{event_id}</td>
-                <td>{fixture}</td>
+                <td className="align-middle">{league}</td>
+                <td className="align-middle">{event_id}</td>
+                <td className="align-middle">{fixture}</td>
                 {switchButtonsList}
             </tr>
         );

@@ -11,7 +11,7 @@ class ActionDropdown extends Component {
                 </button>
                 <ul className="dropdown-menu">
                     <li>
-                        <a>Show Team</a>
+                        <a>{this.props.placeholder}</a>
                     </li>
                 </ul>
             </div>
