@@ -30,7 +30,7 @@ class App extends Component {
     this.interval = setInterval(()=>{
       this.fetchJSONData(endpoint, queryStrSelected)
       .then(this.setMatchRowState)
-    }, 1000)
+    }, 5000)
   }
 
   componentWillUnmount(){
