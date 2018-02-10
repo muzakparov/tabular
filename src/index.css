@@ -9,3 +9,9 @@ body {
   text-decoration: none;
   background-color: #303030;
 }
+
+ul.dropdown-menu{
+  width: 100%;
+}
+
+

@@ -9,8 +9,7 @@ class LeagueListDropdown extends Component {
     }
 
     render() {
-        const options = this.props.leagues.map(
-            
+        const options = this.props.leagues.map(       
 
             (league, i) => {
                
