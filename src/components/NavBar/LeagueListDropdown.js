@@ -18,7 +18,12 @@ class LeagueListDropdown extends Component {
         );
 
         return (
-            <FormControl componentClass="select" onChange={(e)=>{this.handleLeagueSelectChange(e)}} defaultValue="ENG.1">
+            <FormControl 
+                    componentClass="select" 
+                    onChange={(e)=>{this.handleLeagueSelectChange(e)}} 
+                    defaultValue="ENG.1"
+                    style={{transform:"translateY(-10px)"}}
+            >
                 {options}
             </FormControl>
         );
