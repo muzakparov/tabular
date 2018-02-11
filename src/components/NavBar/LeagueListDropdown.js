@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FormControl } from 'react-bootstrap';
 
 class LeagueListDropdown extends Component {    
   
@@ -9,8 +10,7 @@ class LeagueListDropdown extends Component {
     }
 
     render() {
-        const options = this.props.leagues.map(       
-
+        const options = this.props.leagues.map(
             (league, i) => {
                
                 return <option key={i} value={league}>{league}</option>
@@ -18,9 +18,9 @@ class LeagueListDropdown extends Component {
         );
 
         return (
-            <select className="form-control" onChange={(e)=>{this.handleLeagueSelectChange(e)}} defaultValue="ENG.1">
+            <FormControl componentClass="select" onChange={(e)=>{this.handleLeagueSelectChange(e)}} defaultValue="ENG.1">
                 {options}
-            </select>
+            </FormControl>
         );
     }
 }

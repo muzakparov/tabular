@@ -28,7 +28,7 @@ class NavBar extends Component {
                     <Navbar.Collapse>
                         <Nav pullRight>
                             <NavItem eventKey={1} href="#">
-                                League
+                                League: 
                             </NavItem>
                             <NavItem eventKey={0}>
                                 <LeagueListDropdown 
@@ -36,14 +36,6 @@ class NavBar extends Component {
                                         onLeagueSelectChange = {(selectedLeague)=>this.props.onLeagueSelectChange(selectedLeague)} 
                                     />
                             </NavItem>
-
-                            <NavDropdown eventKey={2} title="Dropdown" id="basic-nav-dropdown">
-                                <MenuItem eventKey={3.1}>Action</MenuItem>
-                                <MenuItem eventKey={3.2}>Another action</MenuItem>
-                                <MenuItem eventKey={3.3}>Something else here</MenuItem>
-                                <MenuItem divider />
-                                <MenuItem eventKey={3.3}>Separated link</MenuItem>
-                            </NavDropdown>
                             <NavItem eventKey={3} href="#">
                                 {email}
                             </NavItem>

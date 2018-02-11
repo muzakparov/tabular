@@ -27,14 +27,14 @@ class App extends Component {
     const endpoint = '/get_status?league='
     const queryStrSelected = 'ENG.1';
 
-    this.interval = setInterval(()=>{
-      this.fetchJSONData(endpoint, queryStrSelected)
-      .then(this.setMatchRowState)
-    }, 5000)
+    // this.interval = setInterval(()=>{
+    //   this.fetchJSONData(endpoint, queryStrSelected)
+    //   .then(this.setMatchRowState)
+    // }, 5000)
   }
 
   componentWillUnmount(){
-    clearInterval(this.interval);
+    // clearInterval(this.interval);
   }
 
   setMatchRowState(matchRowArr) {
