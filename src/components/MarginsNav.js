@@ -13,10 +13,9 @@ import {
     MenuItem,
  } from "react-bootstrap";
 
-import PlaceholderComponent from './PlaceholderComponent';
 
 
-class OtherComponent extends Component {
+class MarginsNav extends Component {
 
     render() {
 
@@ -43,21 +42,11 @@ class OtherComponent extends Component {
                     </NavItem>
                 </Nav>
 
-                <Router>
-                    <Switch>
-                        <Route exact 
-                            path="/other" 
-                            component={PlaceholderComponent} 
-                        />
-                        {/* <Route path="/other" component={OtherComponent} /> */}
-                       
-                        {/* <Redirect from="/*" to="/404" /> */}
-                    </Switch>
-                </Router>
+               <div>MarginsNav</div>
                 <p className="text-center middle">OtherComponent</p>
             </div>
         );
     }
 }
 
-export default OtherComponent;
+export default MarginsNav;

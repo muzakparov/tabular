@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import ActionDropdown from './TabList/ActionDropdown'
 
 class PlaceholderComponent extends Component {
    
@@ -9,7 +8,7 @@ class PlaceholderComponent extends Component {
 
         return (
             <div>
-                <ActionDropdown placeholder={"placeholder"}/>
+                PlaceholderComponent
             </div>
         );
     }

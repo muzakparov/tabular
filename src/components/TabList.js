@@ -6,22 +6,20 @@ import {
 } from "react-router-dom";
 import { Switch } from "react-router";
 
-// import ActionDropdown from "./TabList/ActionDropdown";
 import LaunchpadTable from "./TabList/LaunchpadTable";
 import OtherComponent from "./OtherComponent";
+import ParametersNav from "./ParametersNav";
+import MarginsNav from "./MarginsNav";
+import PricesNav from "./PricesNav";
 
-
-class TabList extends Component {
+class TabList extends Component {    
 
     render() {
         const { matchRowArr } = this.props
 
-        // console.log('TabList', this.props.matchRowArr, '\n\n\n')
-        
         return (
             <div className="container">
                 {/* table */}
-                {/* <ActionDropdown /> */}
                 <Router>
                     <Switch>
                         <Route exact 
@@ -33,6 +31,9 @@ class TabList extends Component {
                                         />
                             }
                         />
+                        <Route path="/parameters" component={ParametersNav} />
+                        <Route path="/margins" component={MarginsNav} />
+                        <Route path="/prices" component={PricesNav} />
                         <Route path="/other" component={OtherComponent} />
                        
                         {/* <Redirect from="/*" to="/404" /> */}

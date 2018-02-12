@@ -47,8 +47,6 @@ class TableRow extends Component {
             );
         });                     
 
-        // console.log("KICKOFF", correctDateFormat)
-
         return (
             <tr className="text-center">
                 <td className="align-middle">

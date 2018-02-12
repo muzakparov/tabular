@@ -32,3 +32,18 @@ export const MONTH_NAMES = ["January", "February", "March", "April", "May", "Jun
     "July", "August", "September", "October", "November", "December"
 ];
 
+export const LAUCHPADTABLE_HEADERS = [
+    "Kickoff",
+    "League",
+    "Id",
+    "Name",
+    "MASTER",
+    "Goals",
+    "Corners",
+    "Team Cards",
+    "H-p Cards",
+    "A-p Cards",
+    "H-gs",
+    "A-gs",
+]
+

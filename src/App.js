@@ -60,7 +60,12 @@ class App extends Component {
       return response.json();
     }).
       then((data) => {
-        return new Promise((resolve, reject) => { resolve(data) });
+          return new Promise((resolve, reject) => { resolve(data) });
+      })
+      .catch(err=>{
+        if(err){
+          console.log(err);          
+        }        
       });
   }
 
