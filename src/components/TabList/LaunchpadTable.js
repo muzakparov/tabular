@@ -18,9 +18,7 @@ import { LAUCHPADTABLE_HEADERS } from '../../constants'
 
 class LaunchpadTable extends Component {    
     render() {
-        const { matchRowArr } = this.props
-
-        
+        const { matchRowArr } = this.props        
 
         return (
             <div>

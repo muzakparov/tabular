@@ -47,3 +47,14 @@ export const LAUCHPADTABLE_HEADERS = [
     "A-gs",
 ]
 
+export const PARAMSTABLE_HEADERS = [
+    "Kickoff",
+    "League",
+    "Id",
+    "Name",
+    "PARAMETERS",
+    "Goals",
+    "Corners",
+    "Cards",
+]
+

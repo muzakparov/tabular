@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import './index.css';
+
 import NavBar from './components/NavBar';
 import TabList from './components/TabList';
 
@@ -11,8 +13,9 @@ class App extends Component {
     super()
 
     this.state = {
-      selectedLeague: '',
+      selectedLeague: 'ENG.2',
       matchRowArr: [],
+      paramsRowArr: [],
     }
 
     this.handleLeagueSelectChange = this.handleLeagueSelectChange.bind(this)
@@ -24,16 +27,28 @@ class App extends Component {
     console.log('COMPONENT DID MOUNT\n\n');
     const { selectedLeague } = this.state
 
-    const endpoint = '/get_status?league='
-    const queryStrSelected = 'ENG.1';
+    let endpoint = '/launchpad/get_status?league='
+    const queryStrSelected = selectedLeague;
 
+    //for launchapad
+    this.fetchJSONData(endpoint, queryStrSelected)
+      .then(this.setMatchRowState)
+
+    //for params
+    endpoint = '/params/get_status?league='
+    this.fetchJSONData(endpoint, queryStrSelected)
+      .then(data=>{
+        this.setState({
+          paramsRowArr:data,
+        })
+      })
     // this.interval = setInterval(()=>{
     //   this.fetchJSONData(endpoint, queryStrSelected)
     //   .then(this.setMatchRowState)
     // }, 5000)
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     // clearInterval(this.interval);
   }
 
@@ -45,12 +60,17 @@ class App extends Component {
   }
 
   handleLeagueSelectChange(selectedLeague) {
-    const queryStr = "league=" + selectedLeague
+    const endpoint = '/launchpad/get_status?';
+    const queryStr = "league=" + selectedLeague;
 
     console.log('handleLeagueSelectChange', selectedLeague);
-    this.fetchJSONData("/get_status?", queryStr)
-      .then(this.setMatchRowState);
-
+    this.fetchJSONData(endpoint, queryStr)
+      .then(data=>{
+        this.setState({
+          selectedLeague,
+          matchRowArr:data,
+        })
+      })    
   }
 
   fetchJSONData(endpoint, queryStr) {
@@ -60,12 +80,12 @@ class App extends Component {
       return response.json();
     }).
       then((data) => {
-          return new Promise((resolve, reject) => { resolve(data) });
+        return new Promise((resolve, reject) => { resolve(data) });
       })
-      .catch(err=>{
-        if(err){
-          console.log(err);          
-        }        
+      .catch(err => {
+        if (err) {
+          console.log(err);
+        }
       });
   }
 
@@ -87,26 +107,26 @@ class App extends Component {
 
         let countBtnOff = 0;
 
-        if(btnStatus){
-          matchObj.master=btnStatus
-        }else{          
-          Object.keys(matchObj).forEach(matchObjKeys=>{
-            if(matchObj[matchObjKeys]===true && matchObjKeys!=="master"){             
+        if (btnStatus) {
+          matchObj.master = btnStatus
+        } else {
+          Object.keys(matchObj).forEach(matchObjKeys => {
+            if (matchObj[matchObjKeys] === true && matchObjKeys !== "master") {
               countBtnOff++
             }
           })
 
-          if(!countBtnOff){
-            matchObj.master=btnStatus
+          if (!countBtnOff) {
+            matchObj.master = btnStatus
           }
         }
-      }else if(matchObj.event_id === event_id){
-        if(!btnStatus){
-          matchObj.master=btnStatus
+      } else if (matchObj.event_id === event_id) {
+        if (!btnStatus) {
+          matchObj.master = btnStatus
 
-          Object.keys(matchObj).forEach(matchObjKeys=>{
-            if(matchObj[matchObjKeys]===true){             
-              matchObj[matchObjKeys]=btnStatus
+          Object.keys(matchObj).forEach(matchObjKeys => {
+            if (matchObj[matchObjKeys] === true) {
+              matchObj[matchObjKeys] = btnStatus
             }
           })
         }
@@ -118,10 +138,10 @@ class App extends Component {
     this.setMatchRowState(matchRowArr)
 
     const statusBinary = btnStatus ? "1" : "0"
-    const endpoint = "/write?"
+    const endpoint = "/launchpad/write?"
     const queryStr = "event_id=" + event_id + "&switch=" + switchMarket + "&status=" + statusBinary
 
-    if(switchMarket==="master" && btnStatus)
+    if (switchMarket === "master" && btnStatus)
       return;
     this.postData(endpoint, queryStr)
   }
@@ -131,6 +151,7 @@ class App extends Component {
     const { leagues } = this.state
     const { email } = this.state
     const { matchRowArr } = this.state
+    const { paramsRowArr } = this.state
 
     console.log('APP.js')
     console.table(matchRowArr);
@@ -144,6 +165,7 @@ class App extends Component {
         />
         <TabList
           matchRowArr={matchRowArr}
+          paramsRowArr={paramsRowArr}
           onToggleBtnStatus={this.handleBtnToggle}
         />
       </div>

@@ -14,4 +14,10 @@ ul.dropdown-menu{
   width: 100%;
 }
 
+.params-table td.text-center{
+  vertical-align: middle;  
+}
 
+.params-table td.text-right{
+  white-space: nowrap;
+}

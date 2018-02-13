@@ -16,9 +16,11 @@ class TabList extends Component {
 
     render() {
         const { matchRowArr } = this.props
+        const { paramsRowArr } = this.props
+        
 
         return (
-            <div className="container">
+            <div>
                 {/* table */}
                 <Router>
                     <Switch>
@@ -31,7 +33,13 @@ class TabList extends Component {
                                         />
                             }
                         />
-                        <Route path="/parameters" component={ParametersNav} />
+                        <Route path="/parameters" 
+                            render={
+                                ()=><ParametersNav
+                                        paramsRowArr={paramsRowArr}                                            
+                                    />
+                            }                                
+                        />
                         <Route path="/margins" component={MarginsNav} />
                         <Route path="/prices" component={PricesNav} />
                         <Route path="/other" component={OtherComponent} />
