@@ -1,27 +1,14 @@
 import React, { Component } from 'react';
-import {
-    BrowserRouter as Router,
-    Route,
-    Redirect,
-    NavLink,
-} from "react-router-dom";
-import { Switch } from "react-router";
+
 import { 
-    Table,
-    FormControl,
     Alert,
     Fade,
-    Popover,
-    Modal,
-    OverlayTrigger,
  } from "react-bootstrap";
 
-import { PARAMSTABLE_HEADERS } from '../constants';
+// import { PARAMSTABLE_HEADERS } from '../constants';
 
 import TableNavigation from './TableNavigation';
 import ParamsTable from './ParametersNav/ParamsTable';
-
-import LaunchpadTableHead from './TabList/LaunchpadTable/LaunchpadTableHead';
 
 
 class ParametersNav extends Component {

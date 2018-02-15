@@ -38,9 +38,9 @@ class App extends Component {
     //for params
     endpoint = '/params/get_status?league='
     this.fetchJSONData(endpoint, queryStrSelected)
-      .then(data=>{
+      .then(data => {
         this.setState({
-          paramsRowArr:data,
+          paramsRowArr: data,
         })
       })
     // this.interval = setInterval(()=>{
@@ -66,21 +66,23 @@ class App extends Component {
 
     console.log('handleLeagueSelectChange', selectedLeague);
     this.fetchJSONData(endpoint, queryStr)
-      .then(data=>{
+      .then(data => {
         this.setState({
           selectedLeague,
-          matchRowArr:data,
+          matchRowArr: data,
         })
-      })    
+      })
   }
 
-  handleLambdaChange(event_id, propName, value){
+  handleLambdaChange(event_id, propName, value) {
     let paramsRowArr = this.state.paramsRowArr.slice()
 
-    paramsRowArr.map((param)=>{
-      if(param.event_id === event_id){
+    paramsRowArr.map((param) => {
+      if (param.event_id === event_id) {
         param[propName] = value
       }
+
+      return param;
     })
 
     this.setState({
@@ -93,8 +95,8 @@ class App extends Component {
 
     return fetch(URL + query).then((response) => {
       return response.json();
-    }).
-      then((data) => {
+    })
+      .then((data) => {
         return new Promise((resolve, reject) => { resolve(data) });
       })
       .catch(err => {
@@ -163,8 +165,6 @@ class App extends Component {
 
 
   render() {
-    const { leagues } = this.state
-    const { email } = this.state
     const { matchRowArr } = this.state
     const { paramsRowArr } = this.state
 

@@ -1,58 +1,45 @@
 import React, { Component } from 'react';
-import { NavLink } from "react-router-dom";
-import { 
+import {
     Nav,
     NavItem,
-    NavDropdown,
-    MenuItem,
- } from "react-bootstrap";
+} from "react-bootstrap";
 
- import { LinkContainer } from "react-router-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 
-class TableNavigation extends Component {   
+class TableNavigation extends Component {
 
-    render() {    
+    render() {
 
         return (
-                <Nav bsStyle="tabs" activeKey={this.props.activeKey}>
+            <Nav bsStyle="tabs" activeKey={this.props.activeKey}>
+                <LinkContainer exact to="/" >
                     <NavItem eventKey="1">
-                            <NavLink
-                                to="/"
-                                className="nav-link"                            
-                                activeClassName="activeX"
-                            >
-                                LaunchpadTable
-                            </NavLink>
+                        LaunchpadTable
                     </NavItem>
+                </LinkContainer>
+                <LinkContainer exact to="/parameters" >
                     <NavItem eventKey="2">
-                            <NavLink
-                                to="/parameters"
-                                className="nav-link"
-                                activeClassName="activeX"
-                            >
-                                Parameters
-                            </NavLink>
-                    </NavItem>
+                        Parameters
+                        </NavItem>
+                </LinkContainer>
+                <LinkContainer exact to="/margins" >
                     <NavItem eventKey="3">
-                            <NavLink
+                        {/* <NavLink
                                 to="/margins"
                                 className="nav-link"
                                 activeClassName="activeX"
-                            >
-                                Margins
-                            </NavLink>
+                            > */}
+                        Margins
+                            {/* </NavLink> */}
                     </NavItem>
+                </LinkContainer>
+                <LinkContainer exact to="/prices" >
                     <NavItem eventKey="4">
-                            <NavLink
-                                to="/prices"
-                                className="nav-link"
-                                activeClassName="activeX"
-                            >
-                                Prices
-                            </NavLink>
+                        Prices
                     </NavItem>
-                </Nav>               
+                </LinkContainer>
+            </Nav>
         );
     }
 }

@@ -22,7 +22,7 @@ class KickoffDateLabel extends Component {
         }else if(kickoffDay===todayDay+1){
             correctDateFormat="Tomorrow"
         }else{
-            const suffix = (kickoffDay==1)?"st":(kickoffDay==2?"nd":(kickoffDay==3?"rd":"th"))
+            const suffix = (kickoffDay===1)?"st":(kickoffDay===2?"nd":(kickoffDay===3?"rd":"th"))
 
             correctDateFormat=(kickoffDay+`${suffix} `+ MONTH_NAMES[kickoffDate.getMonth()])
         }

@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
-import {
-    BrowserRouter as Router,
-    Route,
-    Redirect,
-    NavLink,
-} from "react-router-dom";
-import { Switch } from "react-router";
+
 import {
     Table,
-    FormControl,
 } from "react-bootstrap";
 
 import ParamsTableHead from './ParamsTableHead';

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import {  MONTH_NAMES } from '../../../constants'
-
 import SwitchButton from './SwitchButton';
 import KickoffDateLabel from './KickoffDateLabel';
 

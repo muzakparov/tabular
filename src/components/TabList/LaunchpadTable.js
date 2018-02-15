@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
-import { NavLink } from "react-router-dom";
 import { 
-    Nav,
-    NavItem,
-    NavDropdown,
-    MenuItem,
     Table,
  } from "react-bootstrap";
 
 import LaunchpadTableHead from "./LaunchpadTable/LaunchpadTableHead";
-import LaunchpadTableRow from "./LaunchpadTable/LaunchpadTableRow";
 import LaunchpadTableRowsList from "./LaunchpadTable/LaunchpadTableRowsList";
 import TableNavigation from '../TableNavigation';
 
