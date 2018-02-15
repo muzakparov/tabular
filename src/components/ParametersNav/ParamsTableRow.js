@@ -41,72 +41,74 @@ class ParamsTableRow extends Component {
         const { param } = this.props
 
         return (
-            <React.Fragment>
-                <tr>
-                    <td rowSpan="5" className="text-center"><KickoffDateLabel kickoff={param.kickoff} /></td>
-                    <td rowSpan="5" className="text-center">{param.league}</td>
-                    <td rowSpan="5" className="text-center">{param.event_id}</td>
-                    <td rowSpan="5" className="text-center">{param.fixture}</td>
-                    <td className="text-right">lambda</td>
-                    <td className="text-center">{param.goals_home_io.toFixed(1)}</td>
-                    <td className="text-center">{param.goals_away_io.toFixed(1)}</td>
-                    <td className="text-center">{param.corners_home_io.toFixed(1)}</td>
-                    <td className="text-center">{param.corners_away_io.toFixed(1)}</td>
-                    <td className="text-center">{param.cards_home_io.toFixed(1)}</td>
-                    <td className="text-center">{param.cards_away_io.toFixed(1)}</td>
-                    <td rowSpan="5" className="text-center">
-                        <button className="btn btn-warning" onClick={this.handleUpdateClick}>UPDATE</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td className="text-right">market lambda</td>
-                    <td className="text-center">{param.goals_home_market.toFixed(1)}</td>
-                    <td className="text-center">{param.goals_away_market.toFixed(1)}</td>
-                    <td className="text-center">{param.corners_home_market.toFixed(1)}</td>
-                    <td className="text-center">{param.corners_away_market.toFixed(1)}</td>
-                    <td className="text-center">{param.cards_home_market.toFixed(1)}</td>
-                    <td className="text-center">{param.cards_away_market.toFixed(1)}</td>
-                </tr>
-                <tr>
-                    <td className="text-right">suggested lambda change</td>
-                    <td className="text-center">{"X"}</td>
-                    <td className="text-center">{"X"}</td>
-                    <td className="text-center">{"X"}</td>
-                    <td className="text-center">{"X"}</td>
-                    <td className="text-center">{"X"}</td>
-                    <td className="text-center">{"X"}</td>
-                </tr>
-                <tr>
-                    <td className="text-right">lambda change</td>
-                    <td className="text-center">
-                        <LambdaChangeInput onLambdaChange={this.props.onLambdaChange} step="0.01" lambdaChange={{ "goals_home_bump": param.goals_home_bump }} event_id={param.event_id} />
-                    </td>
-                    <td className="text-center">
-                        <LambdaChangeInput onLambdaChange={this.props.onLambdaChange} step="0.01" lambdaChange={{ "goals_away_bump": param.goals_away_bump }} event_id={param.event_id} />
-                    </td>
-                    <td className="text-center">
-                        <LambdaChangeInput onLambdaChange={this.props.onLambdaChange} step="0.05" lambdaChange={{ "corners_home_bump": param.corners_home_bump }} event_id={param.event_id} />
-                    </td>
-                    <td className="text-center">
-                        <LambdaChangeInput onLambdaChange={this.props.onLambdaChange} step="0.05" lambdaChange={{ "corners_away_bump": param.corners_away_bump }} event_id={param.event_id} />
-                    </td>
-                    <td className="text-center">
-                        <LambdaChangeInput onLambdaChange={this.props.onLambdaChange} step="0.05" lambdaChange={{ "cards_home_bump": param.cards_home_bump }} event_id={param.event_id} />
-                    </td>
-                    <td className="text-center">
-                        <LambdaChangeInput onLambdaChange={this.props.onLambdaChange} step="0.05" lambdaChange={{ "cards_away_bump": param.cards_away_bump }} event_id={param.event_id} />
-                    </td>
-                </tr>
-                <tr>
-                    <td className="text-right">market status</td>
-                    <td className="text-center">{"X"}</td>
-                    <td className="text-center">{"X"}</td>
-                    <td className="text-center">{"X"}</td>
-                    <td className="text-center">{"X"}</td>
-                    <td className="text-center">{"X"}</td>
-                    <td className="text-center">{"X"}</td>
-                </tr>
-            </React.Fragment>
+               
+                <React.Fragment>
+                    <tr>
+                        <td rowSpan="5" className="text-center"><KickoffDateLabel kickoff={param.kickoff} /></td>
+                        <td rowSpan="5" className="text-center">{param.league}</td>
+                        <td rowSpan="5" className="text-center">{param.event_id}</td>
+                        <td rowSpan="5" className="text-center">{param.fixture}</td>
+                        <td className="text-right">lambda</td>
+                        <td className="text-center">{param.goals_home_io.toFixed(1)}</td>
+                        <td className="text-center">{param.goals_away_io.toFixed(1)}</td>
+                        <td className="text-center">{param.corners_home_io.toFixed(1)}</td>
+                        <td className="text-center">{param.corners_away_io.toFixed(1)}</td>
+                        <td className="text-center">{param.cards_home_io.toFixed(1)}</td>
+                        <td className="text-center">{param.cards_away_io.toFixed(1)}</td>
+                        <td rowSpan="5" className="text-center">
+                            <button className="btn btn-warning" onClick={this.handleUpdateClick}>UPDATE</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className="text-right">market lambda</td>
+                        <td className="text-center">{param.goals_home_market.toFixed(1)}</td>
+                        <td className="text-center">{param.goals_away_market.toFixed(1)}</td>
+                        <td className="text-center">{param.corners_home_market.toFixed(1)}</td>
+                        <td className="text-center">{param.corners_away_market.toFixed(1)}</td>
+                        <td className="text-center">{param.cards_home_market.toFixed(1)}</td>
+                        <td className="text-center">{param.cards_away_market.toFixed(1)}</td>
+                    </tr>
+                    <tr>
+                        <td className="text-right">suggested lambda change</td>
+                        <td className="text-center">{"X"}</td>
+                        <td className="text-center">{"X"}</td>
+                        <td className="text-center">{"X"}</td>
+                        <td className="text-center">{"X"}</td>
+                        <td className="text-center">{"X"}</td>
+                        <td className="text-center">{"X"}</td>
+                    </tr>
+                    <tr>
+                        <td className="text-right">lambda change</td>
+                        <td className="text-center">
+                            <LambdaChangeInput onLambdaChange={this.props.onLambdaChange} step="0.01" lambdaChange={{ "goals_home_bump": param.goals_home_bump }} event_id={param.event_id} />
+                        </td>
+                        <td className="text-center">
+                            <LambdaChangeInput onLambdaChange={this.props.onLambdaChange} step="0.01" lambdaChange={{ "goals_away_bump": param.goals_away_bump }} event_id={param.event_id} />
+                        </td>
+                        <td className="text-center">
+                            <LambdaChangeInput onLambdaChange={this.props.onLambdaChange} step="0.05" lambdaChange={{ "corners_home_bump": param.corners_home_bump }} event_id={param.event_id} />
+                        </td>
+                        <td className="text-center">
+                            <LambdaChangeInput onLambdaChange={this.props.onLambdaChange} step="0.05" lambdaChange={{ "corners_away_bump": param.corners_away_bump }} event_id={param.event_id} />
+                        </td>
+                        <td className="text-center">
+                            <LambdaChangeInput onLambdaChange={this.props.onLambdaChange} step="0.05" lambdaChange={{ "cards_home_bump": param.cards_home_bump }} event_id={param.event_id} />
+                        </td>
+                        <td className="text-center">
+                            <LambdaChangeInput onLambdaChange={this.props.onLambdaChange} step="0.05" lambdaChange={{ "cards_away_bump": param.cards_away_bump }} event_id={param.event_id} />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className="text-right">market status</td>
+                        <td className="text-center">{"X"}</td>
+                        <td className="text-center">{"X"}</td>
+                        <td className="text-center">{"X"}</td>
+                        <td className="text-center">{"X"}</td>
+                        <td className="text-center">{"X"}</td>
+                        <td className="text-center">{"X"}</td>
+                    </tr>
+                </React.Fragment>
+            
         );
     }
 }

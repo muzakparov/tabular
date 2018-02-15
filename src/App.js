@@ -13,7 +13,7 @@ class App extends Component {
     super()
 
     this.state = {
-      selectedLeague: 'ENG.2',
+      selectedLeague: 'ENG.1',
       matchRowArr: [],
       paramsRowArr: [],
     }
@@ -61,7 +61,7 @@ class App extends Component {
   }
 
   handleLeagueSelectChange(selectedLeague) {
-    const endpoint = '/launchpad/get_status?';
+    let endpoint = '/launchpad/get_status?';
     const queryStr = "league=" + selectedLeague;
 
     console.log('handleLeagueSelectChange', selectedLeague);
@@ -72,6 +72,13 @@ class App extends Component {
           matchRowArr: data,
         })
       })
+
+    this.fetchJSONData(endpoint, queryStr)
+    .then(data=>{
+      this.setState({
+        paramsRowArr: data,
+      })
+    })
   }
 
   handleLambdaChange(event_id, propName, value) {
@@ -168,7 +175,7 @@ class App extends Component {
     const { matchRowArr } = this.state
     const { paramsRowArr } = this.state
 
-    console.log('APP.js')
+    console.log('---------------------APP-----------------------------')
     console.table(matchRowArr);
 
     return (
