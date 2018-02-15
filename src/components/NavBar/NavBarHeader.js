@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
 
+import { Navbar } from 'react-bootstrap';
+
+
 class NavBarHeader extends Component {
 
     render() {
 
         return (
-            <div className="navbar-header">
-                <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-                    aria-controls="navbar">
-                    <span className="sr-only">Toggle navigation</span>
-                    <span className="icon-bar"></span>
-                    <span className="icon-bar"></span>
-                    <span className="icon-bar"></span>
-                </button>
-                <a className="navbar-brand" href="#">Launchpad</a>
-            </div>
+            <Navbar.Header>
+                <Navbar.Brand>
+                    <a href="#brand">Launchpad</a>
+                </Navbar.Brand>
+                <Navbar.Toggle />
+            </Navbar.Header>
         );
     }
 }

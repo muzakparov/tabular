@@ -19,12 +19,7 @@ class NavBar extends Component {
 
         return (
                <Navbar inverse collapseOnSelect>
-                    <Navbar.Header>
-                        <Navbar.Brand>
-                            <a href="#brand">Launchpad</a>
-                        </Navbar.Brand>
-                        <Navbar.Toggle />
-                    </Navbar.Header>
+                   <NavBarHeader />                    
                     <Navbar.Collapse>
                         <Nav pullRight>
                             <NavItem eventKey={1} href="#">

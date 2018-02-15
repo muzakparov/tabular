@@ -28,6 +28,10 @@ ul.dropdown-menu{
   margin-left:45%;
 }
 
+.navbar.navbar-inverse{
+  height:65px;
+}
+
 /* .table-head-fixed{
   position: fixed;
 } */
