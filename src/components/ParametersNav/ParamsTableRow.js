@@ -18,25 +18,35 @@ import LambdaChangeInput from './LambdaChangeInput';
 
 
 class ParamsTableRow extends Component {
-    constructor(){
+    constructor() {
         super()
 
-        this.handleUpdateClick=this.handleUpdateClick.bind(this)
+        this.handleUpdateClick = this.handleUpdateClick.bind(this)
     }
 
-    handleUpdateClick(){
-        fetch(URL+"/params/write", {
-            body: JSON.stringify(this.props.param), 
+    handleUpdateClick() {
+        let isFail = false;
+
+        fetch(URL + "/params/write", {
+            body: JSON.stringify(this.props.param),
             headers: {
-              'content-type': 'application/json'
+                'content-type': 'application/json'
             },
-            method: 'POST', 
-            mode: 'cors', 
-          }).catch(err =>{
-              console.error("/params/write", err);
-          })
+            method: 'POST',
+            mode: 'cors',
+        })
+        .then(() => {
+            this.props.onIsUpdated(isFail);
+            return new Promise((resolve)=>resolve("resolved"));
+        })
+        .catch(err => {
+            console.error("/params/write", err);
+            isFail = true
+
+            this.props.onIsUpdated(isFail);
+        })
     }
-    
+
     render() {
         const { param } = this.props
 
@@ -79,22 +89,22 @@ class ParamsTableRow extends Component {
                 <tr>
                     <td className="text-right">lambda change</td>
                     <td className="text-center">
-                        <LambdaChangeInput onLambdaChange={this.props.onLambdaChange} step="0.01" lambdaChange={{"goals_home_bump":param.goals_home_bump}} event_id={param.event_id}/>
+                        <LambdaChangeInput onLambdaChange={this.props.onLambdaChange} step="0.01" lambdaChange={{ "goals_home_bump": param.goals_home_bump }} event_id={param.event_id} />
                     </td>
                     <td className="text-center">
-                        <LambdaChangeInput onLambdaChange={this.props.onLambdaChange} step="0.01" lambdaChange={{"goals_away_bump":param.goals_away_bump}} event_id={param.event_id} />
+                        <LambdaChangeInput onLambdaChange={this.props.onLambdaChange} step="0.01" lambdaChange={{ "goals_away_bump": param.goals_away_bump }} event_id={param.event_id} />
                     </td>
                     <td className="text-center">
-                        <LambdaChangeInput onLambdaChange={this.props.onLambdaChange} step="0.05" lambdaChange={{"corners_home_bump":param.corners_home_bump}} event_id={param.event_id} />
+                        <LambdaChangeInput onLambdaChange={this.props.onLambdaChange} step="0.05" lambdaChange={{ "corners_home_bump": param.corners_home_bump }} event_id={param.event_id} />
                     </td>
                     <td className="text-center">
-                        <LambdaChangeInput onLambdaChange={this.props.onLambdaChange} step="0.05" lambdaChange={{"corners_away_bump":param.corners_away_bump}} event_id={param.event_id} />
+                        <LambdaChangeInput onLambdaChange={this.props.onLambdaChange} step="0.05" lambdaChange={{ "corners_away_bump": param.corners_away_bump }} event_id={param.event_id} />
                     </td>
                     <td className="text-center">
-                        <LambdaChangeInput onLambdaChange={this.props.onLambdaChange} step="0.05" lambdaChange={{"cards_home_bump":param.cards_home_bump}} event_id={param.event_id} />
+                        <LambdaChangeInput onLambdaChange={this.props.onLambdaChange} step="0.05" lambdaChange={{ "cards_home_bump": param.cards_home_bump }} event_id={param.event_id} />
                     </td>
                     <td className="text-center">
-                        <LambdaChangeInput onLambdaChange={this.props.onLambdaChange} step="0.05" lambdaChange={{"cards_away_bump":param.cards_away_bump}} event_id={param.event_id} />
+                        <LambdaChangeInput onLambdaChange={this.props.onLambdaChange} step="0.05" lambdaChange={{ "cards_away_bump": param.cards_away_bump }} event_id={param.event_id} />
                     </td>
                 </tr>
                 <tr>

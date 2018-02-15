@@ -21,3 +21,13 @@ ul.dropdown-menu{
 .params-table td.text-right{
   white-space: nowrap;
 }
+
+.alert{
+  position:fixed;
+  z-index:9999;
+  margin-left:45%;
+}
+
+/* .table-head-fixed{
+  position: fixed;
+} */
