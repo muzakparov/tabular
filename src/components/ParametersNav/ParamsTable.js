@@ -19,12 +19,10 @@ class ParamsTable extends Component {
     render() {
         const { paramsRowArr } = this.props
 
-
-
         return (
             <Table responsive bordered condensed hover className="params-table">
                 <ParamsTableHead />
-                <ParamsTableBody paramsRowArr={paramsRowArr} />
+                <ParamsTableBody paramsRowArr={paramsRowArr} onLambdaChange={this.props.onLambdaChange}/>
             </Table>
         );
     }

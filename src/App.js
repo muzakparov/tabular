@@ -21,6 +21,7 @@ class App extends Component {
     this.handleLeagueSelectChange = this.handleLeagueSelectChange.bind(this)
     this.setMatchRowState = this.setMatchRowState.bind(this)
     this.handleBtnToggle = this.handleBtnToggle.bind(this)
+    this.handleLambdaChange = this.handleLambdaChange.bind(this)
   }
 
   componentDidMount() {
@@ -71,6 +72,20 @@ class App extends Component {
           matchRowArr:data,
         })
       })    
+  }
+
+  handleLambdaChange(event_id, propName, value){
+    let paramsRowArr = this.state.paramsRowArr.slice()
+
+    paramsRowArr.map((param)=>{
+      if(param.event_id === event_id){
+        param[propName] = value
+      }
+    })
+
+    this.setState({
+      paramsRowArr,
+    })
   }
 
   fetchJSONData(endpoint, queryStr) {
@@ -167,6 +182,7 @@ class App extends Component {
           matchRowArr={matchRowArr}
           paramsRowArr={paramsRowArr}
           onToggleBtnStatus={this.handleBtnToggle}
+          onLambdaChange={this.handleLambdaChange}
         />
       </div>
     );

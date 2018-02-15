@@ -36,7 +36,8 @@ class TabList extends Component {
                         <Route path="/parameters" 
                             render={
                                 ()=><ParametersNav
-                                        paramsRowArr={paramsRowArr}                                            
+                                        paramsRowArr={paramsRowArr}
+                                        onLambdaChange={this.props.onLambdaChange}                                            
                                     />
                             }                                
                         />

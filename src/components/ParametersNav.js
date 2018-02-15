@@ -24,7 +24,7 @@ class ParametersNav extends Component {
         return (
             <div className="container-fluid">
                 <TableNavigation activeKey="2" />                
-                <ParamsTable paramsRowArr={this.props.paramsRowArr} />
+                <ParamsTable paramsRowArr={this.props.paramsRowArr} onLambdaChange={this.props.onLambdaChange}/>
             </div>
         );
     }

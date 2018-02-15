@@ -13,7 +13,7 @@ import {
     MenuItem,
  } from "react-bootstrap";
 
-
+import TableNavigation from './TableNavigation';
 
 class MarginsNav extends Component {
 
@@ -21,29 +21,8 @@ class MarginsNav extends Component {
 
         return (
             <div>
-                <Nav bsStyle="tabs" activeKey="2">
-                    <NavItem eventKey="1">
-                            <NavLink
-                                to="/"
-                                className="nav-link"                            
-                                activeClassName="activeX"
-                            >
-                                LaunchpadTable
-                            </NavLink>
-                    </NavItem>
-                    <NavItem eventKey="2" title="Item">
-                            <NavLink
-                                to="/other"
-                                className="nav-link"
-                                activeClassName="activeX"
-                            >
-                                OtherComponent
-                            </NavLink>
-                    </NavItem>
-                </Nav>
-
-               <div>MarginsNav</div>
-                <p className="text-center middle">OtherComponent</p>
+                <TableNavigation activeKey="3" /> 
+               <div>MarginsNav</div>                
             </div>
         );
     }

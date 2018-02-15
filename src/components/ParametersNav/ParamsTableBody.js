@@ -8,7 +8,7 @@ function ParamsTableBody(props) {
 
     const tbodyRowsList = paramsRowArr.map(param => {
         return (
-            <ParamsTableRow key={param.event_id} param={param} />
+            <ParamsTableRow key={param.event_id} param={param} onLambdaChange={props.onLambdaChange} />
         );
     })
 
