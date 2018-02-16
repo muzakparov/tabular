@@ -14,8 +14,9 @@ class App extends Component {
 
     this.state = {
       selectedLeague: 'ENG.1',
-      matchRowArr: [],
+      launchpadRowArr: [],
       paramsRowArr: [],
+      updateBtnStatusArr:[],//to persist state across routes
     }
 
     this.handleLeagueSelectChange = this.handleLeagueSelectChange.bind(this)
@@ -50,9 +51,15 @@ class App extends Component {
       .then(this.setMatchRowState);
 
       this.fetchJSONData(endpointParams, this.state.selectedLeague)
-      .then(data => {
+      .then(paramsRowArr => {
         this.setState({
-          paramsRowArr: data,
+          paramsRowArr,
+        })
+
+        let updateBtnStatusArr=[];
+
+        paramsRowArr.forEach(paramsRow=>{
+          updateBtnStatusArr.push({event_id:paramsRow.event_id, isChanged:false})
         })
       })
     }, 50000)
@@ -62,11 +69,11 @@ class App extends Component {
     clearInterval(this.interval);
   }
 
-  setMatchRowState(matchRowArr) {
+  setMatchRowState(launchpadRowArr) {
     this.setState({
-      matchRowArr,
+      launchpadRowArr,
     });
-    console.log('matchRowArr STATE', this.state.matchRowArr);
+    console.log('launchpadRowArr STATE', this.state.launchpadRowArr);
   }
 
   handleLeagueSelectChange(selectedLeague) {
@@ -81,7 +88,7 @@ class App extends Component {
     this.fetchJSONData(endpoint, queryStr)
       .then(data => {
         this.setState({          
-          matchRowArr: data,
+          launchpadRowArr: data,
         })
       })
 
@@ -137,7 +144,7 @@ class App extends Component {
   handleBtnToggle(event_id, btnStatus, switchMarket) {
     console.log(`handleBtnToggle ${event_id} ${btnStatus} ${switchMarket} /n`);
 
-    const matchRowArr = this.state.matchRowArr.slice().map(matchObj => {
+    const launchpadRowArr = this.state.launchpadRowArr.slice().map(matchObj => {
       if (matchObj.event_id === event_id && switchMarket !== "master") {
 
         matchObj[switchMarket] = btnStatus;
@@ -172,7 +179,7 @@ class App extends Component {
       return matchObj;
     })
 
-    this.setMatchRowState(matchRowArr)
+    this.setMatchRowState(launchpadRowArr)
 
     const statusBinary = btnStatus ? "1" : "0"
     const endpoint = "/launchpad/write?"
@@ -185,12 +192,12 @@ class App extends Component {
 
 
   render() {
-    const { matchRowArr } = this.state 
+    const { launchpadRowArr } = this.state 
     const { paramsRowArr } = this.state
     const { selectedLeague } = this.state
 
     console.log('---------------------APP-----------------------------')
-    console.table(matchRowArr);
+    console.table(launchpadRowArr);
 
     return (
       <div>
@@ -201,7 +208,7 @@ class App extends Component {
           onLeagueSelectChange={this.handleLeagueSelectChange}
         />
         <TabList
-          matchRowArr={matchRowArr}
+          launchpadRowArr={launchpadRowArr}
           paramsRowArr={paramsRowArr}
           onToggleBtnStatus={this.handleBtnToggle}
           onLambdaChange={this.handleLambdaChange}

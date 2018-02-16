@@ -10,11 +10,12 @@ import OtherComponent from "./OtherComponent";
 import ParametersNav from "./ParametersNav";
 import MarginsNav from "./MarginsNav";
 import PricesNav from "./PricesNav";
+import BootstrapTable from "./BootstrapTable";
 
 class TabList extends Component {    
 
     render() {
-        const { matchRowArr } = this.props
+        const { launchpadRowArr } = this.props
         const { paramsRowArr } = this.props
         
 
@@ -26,7 +27,7 @@ class TabList extends Component {
                             path="/" 
                             render={
                                 ()=><LaunchpadTable
-                                            matchRowArr={matchRowArr}
+                                            launchpadRowArr={launchpadRowArr}
                                             onToggleBtnStatus={this.props.onToggleBtnStatus}
                                         />
                             }
@@ -42,7 +43,7 @@ class TabList extends Component {
                         <Route path="/margins" component={MarginsNav} />
                         <Route path="/prices" component={PricesNav} />
                         <Route path="/other" component={OtherComponent} />
-                       
+                        <Route path="/table" component={BootstrapTable} />
                         {/* <Redirect from="/*" to="/404" /> */}
                     </Switch>
                 </Router>

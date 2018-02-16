@@ -7,9 +7,9 @@ import LaunchpadTableRow from "./LaunchpadTableRow";
 
 class LaunchpadTableRowsList extends Component {    
     render() {
-        const { matchRowArr } = this.props
+        const { launchpadRowArr } = this.props
 
-        const tableRowsList = matchRowArr.map(matchRow => {
+        const tableRowsList = launchpadRowArr.map(matchRow => {
             return (
                 <LaunchpadTableRow
                     key={matchRow.event_id}

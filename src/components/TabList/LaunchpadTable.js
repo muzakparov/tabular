@@ -12,7 +12,7 @@ import { LAUCHPADTABLE_HEADERS } from '../../constants'
 
 class LaunchpadTable extends Component {    
     render() {
-        const { matchRowArr } = this.props        
+        const { launchpadRowArr } = this.props        
 
         return (
             <div>
@@ -24,7 +24,7 @@ class LaunchpadTable extends Component {
                     </thead>
                     <tbody>
                         <LaunchpadTableRowsList 
-                            matchRowArr={matchRowArr}
+                            launchpadRowArr={launchpadRowArr}
                             onToggleBtnStatus={this.props.onToggleBtnStatus}
                         />
                     </tbody>
