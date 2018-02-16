@@ -20,7 +20,6 @@ class TabList extends Component {
 
         return (
             <div>
-                {/* table */}
                 <Router>
                     <Switch>
                         <Route exact 
