@@ -10,6 +10,8 @@ class LambdaChangeInput extends Component{
     handleLambdaChange = (e) =>{
         console.log("VALUE", e.target.value,Object.keys(this.props.lambdaChange)[0], this.props.event_id)
 
+        this.props.onLambdaInputChange()
+
         this.props.onLambdaChange(this.props.event_id,Object.keys(this.props.lambdaChange)[0], e.target.value)       
     }
 

@@ -12,8 +12,9 @@ import LeagueListDropdown from './NavBar/LeagueListDropdown';
 class NavBar extends Component {
     
     render() {
-        const { leagues } = this.props
+        const { leagues } = this.props 
         const { email } = this.props
+        const { selectedLeague } = this.props
 
         return (
                <Navbar inverse collapseOnSelect>
@@ -25,6 +26,7 @@ class NavBar extends Component {
                             </NavItem>
                             <NavItem eventKey={0}>
                                 <LeagueListDropdown 
+                                        selectedLeague={selectedLeague}
                                         leagues={leagues}
                                         onLeagueSelectChange = {(selectedLeague)=>this.props.onLeagueSelectChange(selectedLeague)} 
                                     />

@@ -5,7 +5,7 @@ import './index.css';
 import NavBar from './components/NavBar';
 import TabList from './components/TabList';
 
-import { URL, LEAGUESARR, EMAIL } from './constants';//constants
+import { URL, LEAGUESARR, EMAIL } from './constants';
 
 class App extends Component {
 
@@ -28,29 +28,38 @@ class App extends Component {
     console.log('COMPONENT DID MOUNT\n\n');
     const { selectedLeague } = this.state
 
-    let endpoint = '/launchpad/get_status?league='
+    const endpointLaunchpad = '/launchpad/get_status?league='
+    const endpointParams = '/params/get_status?league='
     const queryStrSelected = selectedLeague;
 
     //for launchapad
-    this.fetchJSONData(endpoint, queryStrSelected)
+    this.fetchJSONData(endpointLaunchpad, queryStrSelected)
       .then(this.setMatchRowState)
 
     //for params
-    endpoint = '/params/get_status?league='
-    this.fetchJSONData(endpoint, queryStrSelected)
+    
+    this.fetchJSONData(endpointParams, queryStrSelected)
       .then(data => {
         this.setState({
           paramsRowArr: data,
         })
       })
-    // this.interval = setInterval(()=>{
-    //   this.fetchJSONData(endpoint, queryStrSelected)
-    //   .then(this.setMatchRowState)
-    // }, 5000)
+
+    this.interval = setInterval(()=>{
+      this.fetchJSONData(endpointLaunchpad, this.state.selectedLeague)
+      .then(this.setMatchRowState);
+
+      this.fetchJSONData(endpointParams, this.state.selectedLeague)
+      .then(data => {
+        this.setState({
+          paramsRowArr: data,
+        })
+      })
+    }, 50000)
   }
 
   componentWillUnmount() {
-    // clearInterval(this.interval);
+    clearInterval(this.interval);
   }
 
   setMatchRowState(matchRowArr) {
@@ -64,15 +73,19 @@ class App extends Component {
     let endpoint = '/launchpad/get_status?';
     const queryStr = "league=" + selectedLeague;
 
+    this.setState({
+      selectedLeague,
+    })
+
     console.log('handleLeagueSelectChange', selectedLeague);
     this.fetchJSONData(endpoint, queryStr)
       .then(data => {
-        this.setState({
-          selectedLeague,
+        this.setState({          
           matchRowArr: data,
         })
       })
 
+    endpoint = '/params/get_status?';
     this.fetchJSONData(endpoint, queryStr)
     .then(data=>{
       this.setState({
@@ -172,8 +185,9 @@ class App extends Component {
 
 
   render() {
-    const { matchRowArr } = this.state
+    const { matchRowArr } = this.state 
     const { paramsRowArr } = this.state
+    const { selectedLeague } = this.state
 
     console.log('---------------------APP-----------------------------')
     console.table(matchRowArr);
@@ -183,6 +197,7 @@ class App extends Component {
         <NavBar
           leagues={LEAGUESARR}
           email={EMAIL}
+          selectedLeague={selectedLeague}
           onLeagueSelectChange={this.handleLeagueSelectChange}
         />
         <TabList

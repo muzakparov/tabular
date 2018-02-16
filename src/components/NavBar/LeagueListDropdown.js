@@ -10,6 +10,8 @@ class LeagueListDropdown extends Component {
     }
 
     render() {
+        const { selectedLeague } = this.props
+
         const options = this.props.leagues.map(
             (league, i) => {
                
@@ -21,7 +23,7 @@ class LeagueListDropdown extends Component {
             <FormControl 
                     componentClass="select" 
                     onChange={(e)=>{this.handleLeagueSelectChange(e)}} 
-                    defaultValue="ENG.1"
+                    defaultValue={selectedLeague}
                     style={{transform:"translateY(-10px)"}}
             >
                 {options}

@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 
-import { 
-    Alert,
-    Fade,
- } from "react-bootstrap";
-
 // import { PARAMSTABLE_HEADERS } from '../constants';
 
 import TableNavigation from './TableNavigation';
 import ParamsTable from './ParametersNav/ParamsTable';
+import StatusAlert from './StatusAlert';
 
 
 class ParametersNav extends Component {
@@ -49,22 +45,8 @@ class ParametersNav extends Component {
         
         return (
             <div className="container-fluid">
-                {
-                    isUpdated && 
-                    <Fade in={isUpdated} timeout={5000}>
-                            <Alert bsStyle="success">
-                                Updated Successfully
-                            </Alert>
-                    </Fade>
-                }
-                {
-                    isError &&
-                    <Fade in={isError} timeout={5000}>
-                            <Alert bsStyle="danger">
-                                Update Error
-                            </Alert>
-                    </Fade>
-                }
+                <StatusAlert isUpdated={isUpdated} isError={isError} />
+                
                 <TableNavigation activeKey="2" />                
                 <ParamsTable 
                     paramsRowArr={this.props.paramsRowArr} 
