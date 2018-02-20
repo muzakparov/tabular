@@ -16,13 +16,16 @@ class App extends Component {
       selectedLeague: 'ENG.1',
       launchpadRowArr: [],
       paramsRowArr: [],
-      updateBtnStatusArr:[],//to persist state across routes
+      updateParamBtnStatusArr:[],//to persist state across routes
+      marginsRowArr:[],
+      updateMarginBtnStatusArr:[],
     }
 
     this.handleLeagueSelectChange = this.handleLeagueSelectChange.bind(this)
-    this.setMatchRowState = this.setMatchRowState.bind(this)
+    this.setLaunchpadRowState = this.setLaunchpadRowState.bind(this)
     this.handleBtnToggle = this.handleBtnToggle.bind(this)
     this.handleLambdaChange = this.handleLambdaChange.bind(this)
+    this.handleMarginsChange=this.handleMarginsChange.bind(this)
   }
 
   componentDidMount() {
@@ -31,14 +34,15 @@ class App extends Component {
 
     const endpointLaunchpad = '/launchpad/get_status?league='
     const endpointParams = '/params/get_status?league='
+    const endpointMargins = '/margins/get_status?league='
+
     const queryStrSelected = selectedLeague;
 
     //for launchapad
     this.fetchJSONData(endpointLaunchpad, queryStrSelected)
-      .then(this.setMatchRowState)
+      .then(this.setLaunchpadRowState)
 
-    //for params
-    
+    //for params    
     this.fetchJSONData(endpointParams, queryStrSelected)
       .then(data => {
         this.setState({
@@ -46,9 +50,17 @@ class App extends Component {
         })
       })
 
+      //for margins
+      this.fetchJSONData(endpointMargins, queryStrSelected)
+      .then(data=>{
+        this.setState({
+          marginsRowArr:data,
+        })
+      })
+
     this.interval = setInterval(()=>{
       this.fetchJSONData(endpointLaunchpad, this.state.selectedLeague)
-      .then(this.setMatchRowState);
+      .then(this.setLaunchpadRowState);
 
       this.fetchJSONData(endpointParams, this.state.selectedLeague)
       .then(paramsRowArr => {
@@ -62,6 +74,13 @@ class App extends Component {
           updateBtnStatusArr.push({event_id:paramsRow.event_id, isChanged:false})
         })
       })
+
+      this.fetchJSONData(endpointMargins, queryStrSelected)
+      .then(data=>{
+        this.setState({
+          marginsRowArr:data,
+        })
+      })
     }, 50000)
   }
 
@@ -69,7 +88,7 @@ class App extends Component {
     clearInterval(this.interval);
   }
 
-  setMatchRowState(launchpadRowArr) {
+  setLaunchpadRowState(launchpadRowArr) {
     this.setState({
       launchpadRowArr,
     });
@@ -114,6 +133,22 @@ class App extends Component {
 
     this.setState({
       paramsRowArr,
+    })
+  }
+
+  handleMarginsChange(event_id, propName, value) {
+    let marginsRowArr = this.state.marginsRowArr.slice()
+
+    marginsRowArr.map((param) => {
+      if (param.event_id === event_id) {
+        param[propName] = value
+      }
+
+      return param;
+    })
+
+    this.setState({
+      marginsRowArr,
     })
   }
 
@@ -179,7 +214,7 @@ class App extends Component {
       return matchObj;
     })
 
-    this.setMatchRowState(launchpadRowArr)
+    this.setLaunchpadRowState(launchpadRowArr)
 
     const statusBinary = btnStatus ? "1" : "0"
     const endpoint = "/launchpad/write?"
@@ -194,7 +229,8 @@ class App extends Component {
   render() {
     const { launchpadRowArr } = this.state 
     const { paramsRowArr } = this.state
-    const { selectedLeague } = this.state
+    const { selectedLeague } = this.state 
+    const { marginsRowArr } = this.state 
 
     console.log('---------------------APP-----------------------------')
     console.table(launchpadRowArr);
@@ -209,9 +245,11 @@ class App extends Component {
         />
         <TabList
           launchpadRowArr={launchpadRowArr}
-          paramsRowArr={paramsRowArr}
+          paramsRowArr={paramsRowArr} 
+          marginsRowArr={marginsRowArr}
           onToggleBtnStatus={this.handleBtnToggle}
           onLambdaChange={this.handleLambdaChange}
+          onMarginsChange={this.handleMarginsChange}
         />
       </div>
     );

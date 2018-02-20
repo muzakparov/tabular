@@ -44,7 +44,7 @@ class ParametersNav extends Component {
         const { isError } = this.state
         
         return (
-            <div className="container-fluid">
+            <div>
                 <StatusAlert isUpdated={isUpdated} isError={isError} />
                 
                 <TableNavigation activeKey="2" />                
