@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import LaunchpadTableRow from "./LaunchpadTableRow";
 
 
-
 class LaunchpadTableRowsList extends Component {    
     render() {
         const { launchpadRowArr } = this.props

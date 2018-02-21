@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import {
-    Table,
-} from 'react-bootstrap';
 
 import TableNavigation from './TableNavigation';
-import MarginsTableHead from './MarginsNav/MarginsTableHead';
-import MarginsTableBody from './MarginsNav/MarginsTableBody';
+import MarginsTable from './MarginsNav/MarginsTable';
+
 
 class MarginsNav extends Component {
 
@@ -17,13 +14,10 @@ class MarginsNav extends Component {
             <div>
                 <TableNavigation activeKey="3" />
                 <div style={{overflowX:"scroll", height:"490px", overflowY:"scroll"}}>
-                    <Table bordered >
-                        <MarginsTableHead />
-                        <MarginsTableBody 
-                            marginsRowArr={marginsRowArr}
-                            onMarginsChange={onMarginsChange}
-                        />
-                    </Table>
+                    <MarginsTable 
+                        marginsRowArr={marginsRowArr}
+                        onMarginsChange={onMarginsChange}
+                    />                   
                 </div>
             </div>
         );

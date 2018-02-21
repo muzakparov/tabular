@@ -22,7 +22,7 @@ class ParamsTableRow extends Component {
     handleUpdateClick() {
         let isFail = false;
 
-        if(this.state.isChanged){
+        if (this.state.isChanged) {
             fetch(URL + "/params/write", {
                 body: JSON.stringify(this.props.param),
                 headers: {
@@ -33,22 +33,22 @@ class ParamsTableRow extends Component {
             })
                 .then(() => {
                     this.props.onIsUpdated(isFail);
-    
+
                     this.setState({
                         isChanged: false,
                     })
-    
+
                     return new Promise((resolve) => resolve("resolved"));
                 })
                 .catch(err => {
                     console.error("/params/write", err);
                     isFail = true
-    
+
                     this.props.onIsUpdated(isFail);
                 })
         }
 
-        
+
     }
 
     handleLambdaInputChange() {

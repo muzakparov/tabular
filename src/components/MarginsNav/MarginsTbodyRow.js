@@ -1,17 +1,75 @@
 import React, { Component } from 'react';
 import {
-    FormControl,
+    Button,
 } from 'react-bootstrap';
+
+import { URL } from "../../constants"
 
 import KickoffDateLabel from "../TabList/LaunchpadTable/KickoffDateLabel"
 
 class MarginsTbodyRow extends Component {
+    constructor() {
+        super()
+
+        this.state = {
+            isChanged: false,
+            changedMarginsObj: {},
+        }
+
+        this.handleMarginsChange = this.handleMarginsChange.bind(this)
+        this.handleUpdateMarginsClick = this.handleUpdateMarginsClick.bind(this)
+    }
+
+    handleMarginsChange(e, propName, event_id) {
+        const changedMarginsObj = { ...this.state.changedMarginsObj }
+        const value = e.target.value
+
+        console.log("changedMarginsObj", e.target.value, '"' + propName + '"', event_id);
+
+        changedMarginsObj["event_id"] = event_id
+        changedMarginsObj[propName] =  value
+
+        this.setState({
+            isChanged: true,
+            changedMarginsObj: changedMarginsObj,
+        })
+
+        this.props.onMarginsChange(event_id,propName, value)
+    }
+
+    handleUpdateMarginsClick() {
+        if (this.state.isChanged) {
+            console.log("changedMarginsObj", this.state.changedMarginsObj)
+
+            fetch(URL + "/margins/write", {
+                body: JSON.stringify(this.state.changedMarginsObj),
+                headers: {
+                    'content-type': 'application/json'
+                },
+                method: 'POST',
+                mode: 'cors',
+            })
+                .then(() => {
+
+                    this.setState({
+                        isChanged: false,
+                        changedMarginsObj: {},
+                    })
+
+                    return new Promise((resolve) => resolve("resolved"));
+                })
+                .catch(err => {
+                    console.error("/margins/write", err);
+
+                })
+        }
+    }
 
     render() {
+        const { isChanged } = this.state
         const { marginsRow } = this.props
-        const { onMarginsChange } = this.props
 
-        const tdsList = [           
+        const tdsList = [
             "away_acard_p_ft",
             "away_ags_p_ft",
             "away_ared_p_ft",
@@ -50,18 +108,18 @@ class MarginsTbodyRow extends Component {
             "total_bp_ft",
             "total_corners_ft",
             "total_goals_bound",
-            "upper_goals_bound",            
+            "upper_goals_bound",
         ]
 
-        const tdChangeableList = tdsList.map(propName => {            
+        const tdChangeableList = tdsList.map(propName => {
             return (
-                <td>
+                <td key={marginsRow["event_id"] + "_" + propName}>
                     <input
                         type="number"
                         className="text-center"
                         step='0.01'
-                        defaultValue={marginsRow[propName].toFixed(2)}
-                        onChange={this.handleMarginsChange}
+                        defaultValue={marginsRow[propName]}
+                        onChange={(e) => { this.handleMarginsChange(e, propName, marginsRow["event_id"]) }}
                     />
                 </td>
             );
@@ -78,8 +136,14 @@ class MarginsTbodyRow extends Component {
                 <td>
                     {marginsRow.event_id}
                 </td>
-                <td style={{whiteSpace:"nowrap"}}>
-                    {marginsRow.fixture}
+                <td style={{ whiteSpace: "nowrap" }}>
+                    <span>{marginsRow.fixture}</span>
+                </td>
+                <td>
+                    <Button
+                        bsStyle={isChanged ? "warning" : "primary"}
+                        onClick={this.handleUpdateMarginsClick}
+                    >Update</Button>
                 </td>
                 {tdChangeableList}
             </tr>

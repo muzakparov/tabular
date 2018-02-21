@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-import {
-    Table,
-} from 'react-bootstrap';
-
 
 
 class MarginsTableBody extends Component {
@@ -13,6 +9,7 @@ class MarginsTableBody extends Component {
             "League",
             "Id",
             "Name",
+            "ACTION",
             "away_acard_p_ft",
             "away_ags_p_ft",
             "away_ared_p_ft",
@@ -60,7 +57,7 @@ class MarginsTableBody extends Component {
 
         return (
             <thead>
-                <tr>
+                <tr >
                    {trHeadList}
                 </tr>
             </thead>

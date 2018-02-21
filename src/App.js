@@ -16,16 +16,16 @@ class App extends Component {
       selectedLeague: 'ENG.1',
       launchpadRowArr: [],
       paramsRowArr: [],
-      updateParamBtnStatusArr:[],//to persist state across routes
-      marginsRowArr:[],
-      updateMarginBtnStatusArr:[],
+      updateParamBtnStatusArr: [],//to persist state across routes
+      marginsRowArr: [],
+      updateMarginBtnStatusArr: [],
     }
 
     this.handleLeagueSelectChange = this.handleLeagueSelectChange.bind(this)
     this.setLaunchpadRowState = this.setLaunchpadRowState.bind(this)
     this.handleBtnToggle = this.handleBtnToggle.bind(this)
     this.handleLambdaChange = this.handleLambdaChange.bind(this)
-    this.handleMarginsChange=this.handleMarginsChange.bind(this)
+    this.handleMarginsChange = this.handleMarginsChange.bind(this)
   }
 
   componentDidMount() {
@@ -50,38 +50,47 @@ class App extends Component {
         })
       })
 
-      //for margins
-      this.fetchJSONData(endpointMargins, queryStrSelected)
-      .then(data=>{
+    //for margins
+    this.fetchJSONData(endpointMargins, queryStrSelected)
+      .then(marginsRowArr => {
         this.setState({
-          marginsRowArr:data,
+          marginsRowArr:marginsRowArr,
         })
+
+        this.setUpdateParamBtnStatusArr(marginsRowArr)
       })
 
-    this.interval = setInterval(()=>{
+
+    this.interval = setInterval(() => {
       this.fetchJSONData(endpointLaunchpad, this.state.selectedLeague)
-      .then(this.setLaunchpadRowState);
+        .then(this.setLaunchpadRowState);
 
       this.fetchJSONData(endpointParams, this.state.selectedLeague)
-      .then(paramsRowArr => {
-        this.setState({
-          paramsRowArr,
+        .then(paramsRowArr => {
+          this.setState({
+            paramsRowArr,
+          })
         })
-
-        let updateBtnStatusArr=[];
-
-        paramsRowArr.forEach(paramsRow=>{
-          updateBtnStatusArr.push({event_id:paramsRow.event_id, isChanged:false})
-        })
-      })
 
       this.fetchJSONData(endpointMargins, queryStrSelected)
-      .then(data=>{
-        this.setState({
-          marginsRowArr:data,
+        .then(data => {
+          this.setState({
+            marginsRowArr: data,  
+          })
         })
-      })
-    }, 50000)
+    }, 500000)
+  }
+
+  setUpdateParamBtnStatusArr(marginsRowArr){
+    const updateParamBtnStatusArr = marginsRowArr.map(marginsRow=>(
+      {event_id:marginsRow.event_id, isChanged:false}
+    ))
+
+    this.setState({
+      updateParamBtnStatusArr: updateParamBtnStatusArr,
+    })
+
+    console.log('updateParamBtnStatusArr', updateParamBtnStatusArr)
   }
 
   componentWillUnmount() {
@@ -106,18 +115,28 @@ class App extends Component {
     console.log('handleLeagueSelectChange', selectedLeague);
     this.fetchJSONData(endpoint, queryStr)
       .then(data => {
-        this.setState({          
+        this.setState({
           launchpadRowArr: data,
         })
       })
 
     endpoint = '/params/get_status?';
     this.fetchJSONData(endpoint, queryStr)
-    .then(data=>{
-      this.setState({
-        paramsRowArr: data,
+      .then(data => {
+        this.setState({
+          paramsRowArr: data,
+        })
       })
-    })
+
+    endpoint = '/margins/get_status?';
+    this.fetchJSONData(endpoint, queryStr)
+      .then(marginsRowArr => {
+        this.setState({
+          marginsRowArr: marginsRowArr,
+        })
+
+        this.setUpdateParamBtnStatusArr(marginsRowArr)
+      })
   }
 
   handleLambdaChange(event_id, propName, value) {
@@ -225,12 +244,27 @@ class App extends Component {
     this.postData(endpoint, queryStr)
   }
 
+  handleUpdateParamBtnStatusArr(event_id, isChanged){
+    let updateParamBtnStatusArr=this.state.updateParamBtnStatusArr.slice()
+
+    updateParamBtnStatusArr=updateParamBtnStatusArr.map(updateBtnObj=>{
+      if(updateBtnObj.event_id===event_id){
+        updateBtnObj.isChanged=isChanged
+      }
+    })
+
+    this.setState({
+      updateParamBtnStatusArr,
+    })
+  }
+
 
   render() {
-    const { launchpadRowArr } = this.state 
+    const { launchpadRowArr } = this.state
     const { paramsRowArr } = this.state
     const { selectedLeague } = this.state 
-    const { marginsRowArr } = this.state 
+    const { marginsRowArr } = this.state
+    const { updateParamBtnStatusArr } = this.state
 
     console.log('---------------------APP-----------------------------')
     console.table(launchpadRowArr);
@@ -245,11 +279,13 @@ class App extends Component {
         />
         <TabList
           launchpadRowArr={launchpadRowArr}
-          paramsRowArr={paramsRowArr} 
+          paramsRowArr={paramsRowArr}
           marginsRowArr={marginsRowArr}
+          updateParamBtnStatusArr={updateParamBtnStatusArr}
           onToggleBtnStatus={this.handleBtnToggle}
           onLambdaChange={this.handleLambdaChange}
           onMarginsChange={this.handleMarginsChange}
+          onUpdateParamBtnStatusArr={this.handleUpdateParamBtnStatusArr}
         />
       </div>
     );

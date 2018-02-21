@@ -17,7 +17,8 @@ class TabList extends Component {
     render() {
         const { launchpadRowArr } = this.props
         const { paramsRowArr } = this.props
-        const { marginsRowArr } = this.props        
+        const { marginsRowArr } = this.props      
+        const { updateParamBtnStatusArr } = this.props  
 
         return (
             <div>
@@ -37,6 +38,8 @@ class TabList extends Component {
                                 () => <ParametersNav
                                     paramsRowArr={paramsRowArr}
                                     onLambdaChange={this.props.onLambdaChange}
+                                    updateParamBtnStatusArr={updateParamBtnStatusArr}
+                                    onUpdateParamBtnStatusArr={this.props.onUpdateParamBtnStatusArr}
                                 />
                             }
                         />

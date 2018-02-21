@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import {
-    Table,
-} from 'react-bootstrap';
 
 import MarginsTbodyRow from './MarginsTbodyRow'
 

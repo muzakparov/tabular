@@ -21,7 +21,7 @@ class NavBar extends Component {
                    <NavBarHeader />                    
                     <Navbar.Collapse>
                         <Nav pullRight>
-                            <NavItem eventKey={1} href="#">
+                            <NavItem eventKey={1} href="/">
                                 League: 
                             </NavItem>
                             <NavItem eventKey={0}>
@@ -31,10 +31,10 @@ class NavBar extends Component {
                                         onLeagueSelectChange = {(selectedLeague)=>this.props.onLeagueSelectChange(selectedLeague)} 
                                     />
                             </NavItem>
-                            <NavItem eventKey={3} href="#">
+                            <NavItem eventKey={3} href="/">
                                 {email}
                             </NavItem>
-                            <NavItem eventKey={4} href="#">
+                            <NavItem eventKey={4} href="/">
                                 Logout  
                             </NavItem>                            
                         </Nav>                        
